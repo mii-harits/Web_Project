@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STEM - Home</title>
+    <title>STEM Literacy | OER Commons</title>
+    <link rel="icon" type="image/png" href="https://oercommons.org/static/images/favicon.ico">
+
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,19 +20,26 @@
             color: #121212;
         }
 
-        /* NAVBAR */
+         /* NAVBAR */
         .navbar {
             backdrop-filter: blur(8px);
             background: rgba(255, 255, 255, 0.85);
             border-bottom: 1px solid #e5e5e5;
         }
 
-        .navbar .container-fluid {
+        /* Container navbar */
+        .nav-container {
+            max-width: 1250px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 20px;
+        
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
         }
 
+        /* Logo + teks */
         .navbar-brand {
             display: flex;
             align-items: center;
@@ -39,20 +48,20 @@
             font-size: 20px;
         }
 
-        .navbar-center {
+        /* CENTER MENU */
+        .navbar-nav.mx-auto {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            justify-content: center;
-            gap: 28px;
+            gap: 25px;
         }
 
+        /* Menu link */
         .nav-link {
             font-weight: 500;
             position: relative;
             padding-bottom: 6px;
-            transition: 0.25s;
         }
 
         .nav-link::after {
@@ -64,11 +73,15 @@
             height: 2px;
             background: #007bff;
             transition: 0.3s ease;
-            border-radius: 5px;
         }
 
         .nav-link:hover::after {
             width: 100%;
+        }
+
+        /* Right side (Logout) */
+        .ms-auto {
+            margin-left: auto !important;
         }
 
         /* HERO SECTION */
@@ -161,65 +174,105 @@
         }
 
         /* FOOTER */
-        .footer-link {
-            text-decoration: none;
-            color: #555;
-            font-size: 14px;
-        }
-        .footer-link:hover {
-            color: #0d6efd;
-        }
-        
-        .footer-bottom-full {
-            background-color: #3e4655; /* warna biru gelap */
-            width: 100vw;          /* PAKSA FULL SCREEN */
-            margin-left: calc(50% - 50vw); /* HAPUS BATAS BOOTSTRAP */
-            margin-right: calc(50% - 50vw);
-            margin-bottom: calc(50% - 50vw);
+        footer {
+        background: #f8f9fa;
         }
 
+        footer h6 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-link {
+            color: #555;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Bagian link kebijakan */
+        .footer-policy {
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+        /* FOOTER HITAM BAWAH */
+        .footer-bottom-full {
+            background: #3e4655;
+            color: white;
+            width: 100%;
+            margin-top: 40px;
+            padding-top: 22px;
+            padding-bottom: 22px;
+        }
+
+        .footer-bottom-full img {
+            filter: brightness(1);
+        }
+
+        /* Grid responsif lebih rapih */
+        .footer-columns {
+            row-gap: 30px;
+        }
 
 
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg py-3 px-4 sticky-top shadow-sm">
-        <div class="container-fluid position-relative">
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg py-3 sticky-top shadow-sm">
+    <div class="nav-container">
 
-            <!-- LEFT (LOGO) -->
-            <a class="navbar-brand fw-bold" href="#">
-                <img src="https://img.oercommons.org/40x40/oercommons/media/upload/hubs/logo-stem-v2_2.png" width="38">
-                STEM Center
-            </a>
+        <!-- LEFT (LOGO) -->
+        <a class="navbar-brand fw-bold" href="">
+            <img src="https://oercommons.org/static/newdesign/images/logo-hidpi-square.png" width="38">
+            STEM Center
+        </a>
 
-            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <div class="collapse navbar-collapse" id="nav">
+        <div class="collapse navbar-collapse" id="nav">
 
-                <!-- CENTER MENU -->
-                <ul class="navbar-nav navbar-center">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('stem') }}">STEM</a></li>
-                </ul>
+            <!-- CENTER MENU -->
+            @auth
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('stem') }}">STEM</a></li>
+            </ul>
+            @endauth
 
-                <!-- RIGHT -->
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                            @csrf
-                            <button type="submit" class="btn btn-outline-danger btn-sm">Logout</button>
-                        </form>
-                    </li>
-                </ul>
+            <!-- RIGHT -->
+            <ul class="navbar-nav ms-auto">
+                @guest
+                <li class="nav-item">
+                    <a href="{{ route('login') }}" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-primary btn-sm">Login</button>
+                    </a>
+                </li>
+                @endguest
+                
+                @auth
+                <li class="nav-item">
+                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-danger btn-sm">Logout</button>
+                    </form>
+                </li>
+                @endauth
+            </ul>
 
-            </div>
         </div>
-    </nav>
+
+    </div>
+</nav>
+
 
     <!-- HERO SECTION -->
     <section class="hero">
@@ -251,7 +304,7 @@
 
             <div class="col-md-6 col-lg-3">
                 <div class="resource-card">
-                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=70"
+                    <img src="https://img.oercommons.org/365x280/oercommons/media/upload/landingpages/featured-items/Math-formulas.jpg"
                         class="resource-img">
                     <div class="p-3">
                         <div class="resource-title">Open Access STEM Journals</div>
@@ -530,67 +583,68 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
-    <footer class="mt-5 pt-5 bg-light border-top">
-    <div class="container pb-4">
+<!-- Footer -->
+<footer class="pt-5 border-top">
 
-        <div class="row text-start">
+    <div class="container">
+
+        <div class="row footer-columns">
 
             <!-- Discover -->
-            <div class="col-md-2 mb-4">
-                <h6 class="fw-bold mb-3 text-uppercase small">Discover</h6>
+            <div class="col-6 col-md-2">
+                <h6 class="text-uppercase">Discover</h6>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="footer-link">Resources</a></li>
-                    <li><a href="#" class="footer-link">Collections</a></li>
-                    <li><a href="#" class="footer-link">Providers</a></li>
+                    <li><a class="footer-link" href="#">Resources</a></li>
+                    <li><a class="footer-link" href="#">Collections</a></li>
+                    <li><a class="footer-link" href="#">Providers</a></li>
                 </ul>
             </div>
 
             <!-- Community -->
-            <div class="col-md-2 mb-4">
-                <h6 class="fw-bold mb-3 text-uppercase small">Community</h6>
+            <div class="col-6 col-md-2">
+                <h6 class="text-uppercase">Community</h6>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="footer-link">All Hubs</a></li>
-                    <li><a href="#" class="footer-link">All Groups</a></li>
+                    <li><a class="footer-link" href="#">All Hubs</a></li>
+                    <li><a class="footer-link" href="#">All Groups</a></li>
                 </ul>
             </div>
 
             <!-- Create -->
-            <div class="col-md-2 mb-4">
-                <h6 class="fw-bold mb-3 text-uppercase small">Create</h6>
+            <div class="col-6 col-md-2">
+                <h6 class="text-uppercase">Create</h6>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="footer-link">Open Author</a></li>
-                    <li><a href="#" class="footer-link">Submit a Resource</a></li>
+                    <li><a class="footer-link" href="#">Open Author</a></li>
+                    <li><a class="footer-link" href="#">Submit a Resource</a></li>
                 </ul>
             </div>
 
-            <!-- Our Services -->
-            <div class="col-md-2 mb-4">
-                <h6 class="fw-bold mb-3 text-uppercase small">Our Services</h6>
+            <!-- Services -->
+            <div class="col-6 col-md-2">
+                <h6 class="text-uppercase">Our Services</h6>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="footer-link">About Hubs</a></li>
-                    <li><a href="#" class="footer-link">About OER Commons</a></li>
-                    <li><a href="#" class="footer-link">OER 101</a></li>
-                    <li><a href="#" class="footer-link">Help Center</a></li>
+                    <li><a class="footer-link" href="#">About Hubs</a></li>
+                    <li><a class="footer-link" href="#">About OER Commons</a></li>
+                    <li><a class="footer-link" href="#">OER 101</a></li>
+                    <li><a class="footer-link" href="#">Help Center</a></li>
                 </ul>
             </div>
 
             <!-- My Account -->
-            <div class="col-md-2 mb-4">
-                <h6 class="fw-bold mb-3 text-uppercase small">My Account</h6>
+            <div class="col-6 col-md-2">
+                <h6 class="text-uppercase">My Account</h6>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="footer-link">My Items</a></li>
-                    <li><a href="#" class="footer-link">My Groups</a></li>
-                    <li><a href="#" class="footer-link">My Hubs</a></li>
+                    <li><a class="footer-link" href="#">My Items</a></li>
+                    <li><a class="footer-link" href="#">My Groups</a></li>
+                    <li><a class="footer-link" href="#">My Hubs</a></li>
                 </ul>
             </div>
 
-            <!-- Subscribe / Social -->
-            <div class="col-md-2 mb-4">
-                <h6 class="fw-bold mb-3 text-uppercase small">Newsletter</h6>
-                <button class="btn btn-success btn-sm mb-3">Subscribe</button>
+            <!-- Newsletter + Social -->
+            <div class="col-6 col-md-2">
+                <h6 class="text-uppercase">Newsletter</h6>
+                <button class="btn btn-success btn-sm w-100 mb-3">Subscribe</button>
 
-                <h6 class="fw-bold mb-2 small">Connect</h6>
+                <h6 class="text-uppercase small">Connect</h6>
                 <div class="d-flex gap-2 mb-3">
                     <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" width="28"></a>
                     <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" width="28"></a>
@@ -601,58 +655,47 @@
                 <div class="mt-3">
                     <small class="text-muted text-uppercase">Powered by</small><br>
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Iskme-logo.png/300px-Iskme-logo.png"
-                         width="90" class="mt-1">
+                        width="90" class="mt-1">
                 </div>
             </div>
 
         </div>
 
-        <hr>
-
-        <div class="d-flex flex-wrap justify-content-between small text-muted">
-            <div class="d-flex gap-3 mb-2">
-                <a href="#" class="footer-link">Privacy Policy</a>
-                <a href="#" class="footer-link">Terms of Service</a>
-                <a href="#" class="footer-link">Collection Policy</a>
-                <a href="#" class="footer-link">DMCA</a>
-            </div>
-
-            <!-- FOOTER BAWAH -->
-            <div class="footer-bottom-full text-white py-4 mt-3">
-                <div class="container">
-                
-                    <div class="row align-items-center text-center text-md-start">
-                    
-                        <!-- COPYRIGHT -->
-                        <div class="col-md-4 mb-3 mb-md-0">
-                            © 2007 - 2025, OER Commons
-                        </div>
-                    
-                        <!-- DESCRIPTION -->
-                        <div class="col-md-4 mb-3 mb-md-0 small">
-                            <div>A project created by ISKME.</div>
-                            <div>Content is licensed under Creative Commons BY-NC-SA 4.0.</div>
-                        </div>
-                    
-                        <!-- BADGE -->
-                        <div class="col-md-4 text-md-end">
-                            <img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"
-                                 alt="Creative Commons License"
-                                 width="85">
-                        </div>
-                    
-                    </div>
-                
-                </div>
-            </div>
-
-
-
+        <!-- Kebijakan -->
+        <div class="footer-policy mt-4 pb-3 d-flex flex-wrap gap-3 small">
+            <a href="#" class="footer-link">Privacy Policy</a>
+            <a href="#" class="footer-link">Terms of Service</a>
+            <a href="#" class="footer-link">Collection Policy</a>
+            <a href="#" class="footer-link">DMCA</a>
         </div>
 
-        
     </div>
+
+    <!-- FOOTER BAWAH -->
+    <div class="footer-bottom-full mt-4">
+        <div class="container">
+            <div class="row align-items-center text-center text-md-start">
+
+                <div class="col-md-4 mb-3 mb-md-0">
+                    © 2007 - 2025, OER Commons
+                </div>
+
+                <div class="col-md-4 mb-3 mb-md-0 small">
+                    <div>A project created by ISKME.</div>
+                    <div>Content is licensed under Creative Commons BY-NC-SA 4.0.</div>
+                </div>
+
+                <div class="col-md-4 text-md-end">
+                    <img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"
+                        width="90">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </footer>
+
 
 </body>
 </html>
