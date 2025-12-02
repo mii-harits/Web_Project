@@ -20,8 +20,12 @@ Route::get('/home', function () {
     return view('home');
 })->middleware('auth')->name('home');
 
+Route::get('/create', function () {
+    return view('create');
+})->middleware('auth')->name('create');
+
 // === ROUTE RESOURCES ===
 Route::middleware('auth')->group(function() {
     Route::get('/stem', [ResourceController::class, 'index'])->name('stem');
-    Route::post('/stem', [ResourceController::class, 'store'])->name('stem.store');
+    Route::post('/create', [ResourceController::class, 'store'])->name('create.store');
 });

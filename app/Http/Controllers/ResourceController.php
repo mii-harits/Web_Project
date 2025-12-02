@@ -17,13 +17,45 @@ class ResourceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category_stem' => 'required',
-            'category_resource' => 'required',
-            'title' => 'required',
+            'category_stem' => 'required|string|max:255',
+            'category_resource' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'link' => 'nullable|url',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:4096'
         ]);
 
-        Resource::create($request->all());
+        $data = $request->only([
+           'category_stem',
+           'category_resource',
+           'title',
+           'description',
+           'link'
+        ]);
 
-        return Redirect()->route('stem');
+         if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $file = $request->file('image');
+
+            // Ganti karakter bermasalah
+            $originalName = preg_replace('/[^A-Za-z0-9\-_\.]/', '_', $file->getClientOriginalName());
+            $filename = time() . '_' . $originalName;
+
+            // Tentukan folder tujuan
+            $destinationPath = storage_path('app/public/resources');
+
+            // Pastikan folder ada
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
+        
+            // Pindahkan file ke folder storage
+            $file->move($destinationPath, $filename);
+        
+            $data['image'] = $filename;
+        }
+
+        
+        Resource::create($data);
+        return Redirect()->route('stem')->with('success', 'Buku Berhasil Ditambahkan');
     }
 }

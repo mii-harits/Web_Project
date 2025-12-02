@@ -104,6 +104,101 @@
             justify-content: center;
         }
 
+        /* ======== TABEL MODERN + FIX HOVER ======== */
+        .table-responsive {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        table.table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .table thead th {
+            background: #f0f2f5;
+            text-align: center;
+            vertical-align: middle !important;
+            font-weight: 600;
+            padding: 14px;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        /* Kolom diperlebar */
+        th:nth-child(2), td:nth-child(2) { width: 180px; }
+        th:nth-child(3), td:nth-child(3) { width: 180px; }
+        th:nth-child(4), td:nth-child(4) { width: 220px; }
+
+        /* Hover smooth */
+        .table tbody tr {
+            transition: 0.2s ease;
+        }
+
+        /* Garis pembatas antar baris */
+.table tbody tr {
+    border-bottom: 2px solid #e5e7eb !important; /* abu-abu muda */
+}
+
+
+        /* Hapus efek hover border bawaan Bootstrap */
+        .table-hover tbody tr:hover > * {
+            --bs-table-accent-bg: transparent !important;
+            box-shadow: none !important;
+        }
+
+        /* Batasi deskripsi 3 baris */
+        td:nth-child(5) {
+            max-width: 350px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            word-break: break-word;
+            line-height: 1.4em;
+            height: calc(1.4em * 3); /* exactly 3 lines height */
+        }
+
+
+        /* Image kecil rapi */
+        td:nth-child(7) img {
+            border-radius: 6px;
+            object-fit: cover;
+        }
+
+        /* Pusatkan tombol actions secara sempurna */
+        td:last-child {
+            padding: 0 !important;
+            text-align: center !important;
+        }
+
+        td:last-child .btn-icon {
+            margin: auto;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Perbaikan alignment sel */
+        td, th {
+            vertical-align: middle !important;
+        }
+
+        /* Hilangkan highlight aneh saat hover */
+        td, th {
+            background-clip: padding-box !important;
+        }
+
+        /* Border lembut */
+        .table-bordered > :not(caption) > * > * {
+            border-color: #e2e6ea;
+        }
+
+        /* Row tampak lebih lega */
+        .table td {
+            padding: 14px 12px;
+        }
+
         /* FOOTER */
         footer {
         background: #f8f9fa;
@@ -193,6 +288,23 @@
     </div>
 </nav>
 
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissable fade-show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss='alert' aria-label="Close"></button>
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger" role="alert">
+           <ul class="mb-0">
+            @foreach ($errors->all() as $item)
+                <li>{{ $item }}</li>
+            @endforeach
+           </ul>
+        </div>
+    @endif
+
     <!-- CONTENT -->
     <div class="container mt-4">
         <div class="card shadow-sm p-4 content-card">
@@ -202,8 +314,8 @@
                 <h3 class="fw-bold mb-0">Daftar Resources</h3>
 
                 <!-- ADD DATA BUTTON -->
-                <a href="#" class="btn btn-primary">
-                    + Add Data
+                <a href="{{ route('create') }}" class="btn btn-primary">
+                    + Add Book
                 </a>
             </div>
 
@@ -240,54 +352,23 @@
                     </thead>
 
                     <tbody>
-
+                        @foreach ($resources as $item)
                         <!-- ITEM 1 -->
                         <tr>
-                            <td class="text-center">1</td>
-                            <td>Science</td>
-                            <td>Video</td>
-                            <td>Pengantar Mikroskop</td>
-                            <td>Pembelajaran STEM mengenai cara menggunakan mikroskop.</td>
-                            <td><a href="#" class="text-primary">Kunjungi</a></td>
-                            <td><img src="https://via.placeholder.com/60" width="60" class="rounded"></td>
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td>{{ $item->category_stem }}</td>
+                            <td>{{ $item->category_resource }}</td>
+                            <td>{{ $item->title }}</td>
+                            <td>{{ $item->description }}</td>
+                            <td><a href="{{ $item->link }}" class="text-primary">Kunjungi</a></td>
+                            <td><img src="{{ asset('storage/resources/' . $item->image) }}" width="60"></td>
                             <td class="text-center d-flex justify-content-center align-items-center">
                                 <a href="#" class="btn btn-warning btn-sm btn-icon">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
                             </td>
                         </tr>
-
-                        <!-- ITEM 2 -->
-                        <tr>
-                            <td class="text-center">2</td>
-                            <td>Technology</td>
-                            <td>Article</td>
-                            <td>Artificial Intelligence</td>
-                            <td>Dasar-dasar pemahaman mengenai AI.</td>
-                            <td><a href="#" class="text-primary">Kunjungi</a></td>
-                            <td><img src="https://via.placeholder.com/60" width="60" class="rounded"></td>
-                            <td class="text-center d-flex justify-content-center align-items-center">
-                                <a href="#" class="btn btn-warning btn-sm btn-icon">
-                                    <i class="bi bi-pencil-square"></i>
-                                </a>
-                            </td>
-                        </tr>
-
-                        <!-- ITEM 3 -->
-                        <tr>
-                            <td class="text-center">3</td>
-                            <td>Engineering</td>
-                            <td>Document</td>
-                            <td>Dasar Robotika</td>
-                            <td>File PDF pembelajaran robotika pemula.</td>
-                            <td><a href="#" class="text-primary">Kunjungi</a></td>
-                            <td><img src="https://via.placeholder.com/60" width="60" class="rounded"></td>
-                            <td class="text-center d-flex justify-content-center align-items-center">
-                                <a href="#" class="btn btn-warning btn-sm btn-icon">
-                                    <i class="bi bi-pencil-square"></i>
-                                </a>
-                            </td>
-                        </tr>
+                        @endforeach
 
                     </tbody>
                 </table>
