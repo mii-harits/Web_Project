@@ -58,4 +58,62 @@ class ResourceController extends Controller
         Resource::create($data);
         return Redirect()->route('stem')->with('success', 'Buku Berhasil Ditambahkan');
     }
+
+    public function edit($id)
+    {
+        $resource = Resource::findOrFail($id);
+        return view('edit', compact('resource'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $resource = Resource::findOrFail($id);
+
+        $data = $request->only([
+            'category_stem',
+            'category_resource',
+            'title',
+            'description',
+            'link'
+        ]);
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+
+            $originalName = preg_replace('/[^A-Za-z0-9\-_\.]/', '_', $file->getClientOriginalName());
+            $filename = time() . '_' . $originalName;
+
+            $destinationPath = storage_path('app/public/resources');
+
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
+
+            $file->move($destinationPath, $filename);
+
+            if ($resource->image && file_exists($destinationPath . '/' . $resource->image))  {
+                unlink($destinationPath . '/' . $resource->image);
+            }
+
+            $data['image'] = $filename;
+        }
+
+        $resource->update($data);
+
+        return redirect()->route('stem')->with('success', 'Resource berhasil diperbarui');
+        }
+
+        public function destroy($id)
+        {
+            $resource = Resource::findOrFail($id);
+
+            $path = storage_path('app/public/resources/' . $resource->image);
+            if ($resource->image && file_exists($path)) {
+                unlink($path);
+            }
+
+            $resource->delete();
+
+            return redirect()->route('stem')->with('success', 'Resource berhasil dihapus');
+        }
 }

@@ -19,26 +19,21 @@
             color: #121212;
         }
 
- /* NAVBAR */
+        /* NAVBAR */
         .navbar {
             backdrop-filter: blur(8px);
             background: rgba(255, 255, 255, 0.85);
             border-bottom: 1px solid #e5e5e5;
         }
-        
-        /* Container navbar */
         .nav-container {
             max-width: 1250px;
             margin: 0 auto;
             width: 100%;
             padding: 0 20px;
-        
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
-        
-        /* Logo + teks */
         .navbar-brand {
             display: flex;
             align-items: center;
@@ -46,8 +41,6 @@
             font-weight: 700;
             font-size: 20px;
         }
-        
-        /* CENTER MENU */
         .navbar-nav.mx-auto {
             position: absolute;
             left: 50%;
@@ -55,14 +48,11 @@
             display: flex;
             gap: 25px;
         }
-        
-        /* Menu link */
         .nav-link {
             font-weight: 500;
             position: relative;
             padding-bottom: 6px;
         }
-        
         .nav-link::after {
             content: "";
             position: absolute;
@@ -73,143 +63,177 @@
             background: #007bff;
             transition: 0.3s ease;
         }
-        
         .nav-link:hover::after {
             width: 100%;
         }
-        
-        /* Right side (Logout) */
         .ms-auto {
             margin-left: auto !important;
-        }        
+        }
 
         .content-card {
             border-radius: 15px;
         }
-        footer {
-            background: #ffffff;
-            border-top: 1px solid #eaeaea;
-            padding: 15px 0;
-            margin-top: 40px;
-        }
-        .table thead {
-            background-color: #eef0f3;
-        }
-        .btn-icon {
-            width: 36px;
-            height: 36px;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+
+        .container-fluid.px-5 {
+            max-width: 1600px;
+            padding-left: 40px;
+            padding-right: 40px;
         }
 
-        /* ======== TABEL MODERN + FIX HOVER ======== */
-        .table-responsive {
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        table.table {
-            border-collapse: separate;
+        /* ==============================
+           TABLE
+        =============================== */
+        table.soft-table {
+            width: 100%;
+            border-collapse: separate !important;
             border-spacing: 0;
-        }
-
-        .table thead th {
-            background: #f0f2f5;
-            text-align: center;
-            vertical-align: middle !important;
-            font-weight: 600;
-            padding: 14px;
-            border-bottom: 2px solid #dee2e6;
-        }
-
-        /* Kolom diperlebar */
-        th:nth-child(2), td:nth-child(2) { width: 180px; }
-        th:nth-child(3), td:nth-child(3) { width: 180px; }
-        th:nth-child(4), td:nth-child(4) { width: 220px; }
-
-        /* Hover smooth */
-        .table tbody tr {
-            transition: 0.2s ease;
-        }
-
-        /* Garis pembatas antar baris */
-.table tbody tr {
-    border-bottom: 2px solid #e5e7eb !important; /* abu-abu muda */
-}
-
-
-        /* Hapus efek hover border bawaan Bootstrap */
-        .table-hover tbody tr:hover > * {
-            --bs-table-accent-bg: transparent !important;
-            box-shadow: none !important;
-        }
-
-        /* Batasi deskripsi 3 baris */
-        td:nth-child(5) {
-            max-width: 350px;
+            border: 2px solid #d0d7e2;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
             overflow: hidden;
-            text-overflow: ellipsis;
+        }
+
+        table.soft-table thead th {
+            background: #E8F6FF;
+            color: #5A6E7A;
+            padding: 8px 10px;
+            border-bottom: 2px solid #d3e4f3;
+            font-weight: 400 !important;
+            text-align: center;
+        }
+
+        table.soft-table tbody td {
+            background: #E8F6FFe;
+            color: #5A6E7A;
+            padding: 8px 10px;
+            font-size: 14px;
+            border-bottom: 1px solid #e3e9f0;
+            vertical-align: middle;
+        }
+
+        table.soft-table tbody tr:last-child td {
+            border-bottom: none; /* hilangkan border bawah di row terakhir */
+        }
+
+        table.soft-table tbody td:first-child {
+            padding-left: 18px !important;
+            padding-right: 18px !important;
+            text-align: center;
+            min-width: 55px;
+        }
+
+        table.soft-table td.description-cell {
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
-            word-break: break-word;
-            line-height: 1.4em;
-            height: calc(1.4em * 3); /* exactly 3 lines height */
+            overflow: hidden !important;
+            text-overflow: ellipse;
+            position: relative;
+            max-width: 500px;
+            text-align: justify
         }
 
+        .text-clamp {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
 
-        /* Image kecil rapi */
-        td:nth-child(7) img {
+        .cell-badge {
+            display: inline-block;
+            background: #f0f4ff;
+            color: #007bff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        table.soft-table td.actions-cell {
+            text-align: center;
+        }
+
+        table.soft-table td img {
             border-radius: 6px;
             object-fit: cover;
         }
 
-        /* Pusatkan tombol actions secara sempurna */
-        td:last-child {
-            padding: 0 !important;
-            text-align: center !important;
-        }
-
-        td:last-child .btn-icon {
-            margin: auto;
-            display: flex !important;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Perbaikan alignment sel */
-        td, th {
+        table th, table td {
             vertical-align: middle !important;
         }
 
-        /* Hilangkan highlight aneh saat hover */
-        td, th {
-            background-clip: padding-box !important;
+        .actions-cell .btn {
+            margin: 0 2px !important;
+            padding: 0 !important;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            border-radius: 8px !important;
+            background: none !important;   /* hilangkan kotak */
+            border: none !important;       /* hilangkan border */
+            box-shadow: none !important;
+            border: none !important;
         }
 
-        /* Border lembut */
-        .table-bordered > :not(caption) > * > * {
-            border-color: #e2e6ea;
+        .actions-cell .btn i { 
+            font-size: 17px;               /* ukuran icon */
+            transition: 0.2s ease;      
         }
 
-        /* Row tampak lebih lega */
-        .table td {
-            padding: 14px 12px;
+        /* Warna icon */
+        .actions-cell .btn-edit i {
+            color: #007bff; /* biru */
+        }
+        .actions-cell .btn-delete i {
+            color: #dc3545; /* merah */
         }
 
-        /* FOOTER */
+        .actions-cell .btn-edit:hover i {
+            color: #0056b3; /* biru darker */
+            transform: scale(1.15);
+        }
+        .actions-cell .btn-delete:hover i {
+            color: #a71d2a; /* merah darker */
+            transform: scale(1.15);
+        }
+
+
+        .btn-warning.btn-icon {
+            border-radius: 8px !important;     /* fix bentuk */
+        }
+
+        .btn-danger.btn-icon {
+            border-radius: 8px !important;
+        }
+
+        /* =====================================
+           ✔ FIX: tombol selalu sejajar menyamping
+        ======================================*/
+        .actions-cell {
+            white-space: nowrap !important;
+        }
+        .actions-cell form {
+            display: inline-block !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        .btn-icon i {
+            font-size: 14px;
+        }
+
+        /* Footer styles */
         footer {
-        background: #f8f9fa;
+            background: #f8f9fa;
         }
-
         footer h6 {
             font-size: 0.85rem;
             font-weight: 700;
             letter-spacing: 0.5px;
         }
-
         .footer-link {
             color: #555;
             text-decoration: none;
@@ -218,14 +242,10 @@
         .footer-link:hover {
             text-decoration: underline;
         }
-
-        /* Bagian link kebijakan */
         .footer-policy {
             border-top: 1px solid #ddd;
             padding-top: 15px;
         }
-
-        /* FOOTER HITAM BAWAH */
         .footer-bottom-full {
             background: #3e4655;
             color: white;
@@ -234,16 +254,12 @@
             padding-top: 22px;
             padding-bottom: 22px;
         }
-
         .footer-bottom-full img {
             filter: brightness(1);
         }
-
-        /* Grid responsif lebih rapih */
         .footer-columns {
             row-gap: 30px;
         }
-
     </style>
 </head>
 <body>
@@ -251,20 +267,14 @@
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg py-3 sticky-top shadow-sm">
     <div class="nav-container">
-
-        <!-- LEFT (LOGO) -->
         <a class="navbar-brand fw-bold" href="">
             <img src="https://oercommons.org/static/newdesign/images/logo-hidpi-square.png" width="38">
             STEM Center
         </a>
-
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="nav">
-
-            <!-- CENTER MENU -->
             @auth
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
@@ -272,8 +282,6 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('stem') }}">STEM</a></li>
             </ul>
             @endauth
-
-            <!-- RIGHT -->
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <form action="{{ route('logout') }}" method="POST" class="d-inline">
@@ -282,109 +290,112 @@
                     </form>
                 </li>
             </ul>
-
         </div>
-
     </div>
 </nav>
 
-    @if (session('success'))
-        <div class="alert alert-success alert-dismissable fade-show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss='alert' aria-label="Close"></button>
-        </div>
-    @endif
-
-    @if ($errors->any())
-        <div class="alert alert-danger" role="alert">
-           <ul class="mb-0">
-            @foreach ($errors->all() as $item)
-                <li>{{ $item }}</li>
-            @endforeach
-           </ul>
-        </div>
-    @endif
-
-    <!-- CONTENT -->
-    <div class="container mt-4">
-        <div class="card shadow-sm p-4 content-card">
-
-            <!-- TITLE + ADD DATA -->
-            <div class="d-flex justify-content-between align-items-center">
-                <h3 class="fw-bold mb-0">Daftar Resources</h3>
-
-                <!-- ADD DATA BUTTON -->
-                <a href="{{ route('create') }}" class="btn btn-primary">
-                    + Add Book
-                </a>
-            </div>
-
-            <p class="text-muted mt-2">Berikut daftar resource yang telah diupload.</p>
-
-            <!-- IMPORT BAR -->
-            <div class="d-flex align-items-center gap-2 my-3">
-
-                <button class="btn btn-primary">Import File (CSV/XLSX)</button>
-
-                <div class="input-group" style="max-width: 420px;">
-                    <input type="text" class="form-control" placeholder="Tempel Google Sheets URL (public)">
-                    <button class="btn btn-success">Import Sheets</button>
-                </div>
-
-            </div>
-
-            <hr>
-
-            <!-- TABLE -->
-            <div class="table-responsive mt-3">
-                <table class="table table-bordered table-hover align-middle">
-                    <thead>
-                        <tr class="text-center">
-                            <th style="width: 50px;">No</th>
-                            <th>Kategori STEM</th>
-                            <th>Kategori Resources</th>
-                            <th>Judul</th>
-                            <th>Deskripsi</th>
-                            <th>Link</th>
-                            <th>Image</th>
-                            <th style="width: 80px;">Actions</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @foreach ($resources as $item)
-                        <!-- ITEM 1 -->
-                        <tr>
-                            <td class="text-center">{{ $loop->iteration }}</td>
-                            <td>{{ $item->category_stem }}</td>
-                            <td>{{ $item->category_resource }}</td>
-                            <td>{{ $item->title }}</td>
-                            <td>{{ $item->description }}</td>
-                            <td><a href="{{ $item->link }}" class="text-primary">Kunjungi</a></td>
-                            <td><img src="{{ asset('storage/resources/' . $item->image) }}" width="60"></td>
-                            <td class="text-center d-flex justify-content-center align-items-center">
-                                <a href="#" class="btn btn-warning btn-sm btn-icon">
-                                    <i class="bi bi-pencil-square"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        @endforeach
-
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
+@if (session('success'))
+    <div class="alert alert-success alert-dismissable fade-show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss='alert' aria-label="Close"></button>
     </div>
+@endif
+
+@if ($errors->any())
+    <div class="alert alert-danger" role="alert">
+       <ul class="mb-0">
+        @foreach ($errors->all() as $item)
+            <li>{{ $item }}</li>
+        @endforeach
+       </ul>
+    </div>
+@endif
+
+<!-- CONTENT -->
+<div class="container-fluid mt-4 px-5">
+    <div class="card shadow-sm p-4 content-card">
+
+        <!-- TITLE + ADD DATA -->
+        <div class="d-flex justify-content-between align-items-center">
+            <h3 class="fw-bold mb-0">Daftar Resources</h3>
+            <a href="{{ route('create') }}" class="btn btn-primary">+ Add Book</a>
+        </div>
+
+        <p class="text-muted mt-2">Berikut daftar resource yang telah diupload.</p>
+
+        <!-- IMPORT BAR -->
+        <div class="d-flex align-items-center gap-2 my-3">
+            <button class="btn btn-primary">Import File (CSV/XLSX)</button>
+            <div class="input-group" style="max-width: 420px;">
+                <input type="text" class="form-control" placeholder="Tempel Google Sheets URL (public)">
+                <button class="btn btn-success">Import Sheets</button>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- TABLE -->
+        <div class="table-responsive mt-3">
+            <table class="table soft-table align-middle">
+                <thead>
+                    <tr class="text-center">
+                        <th>No</th>
+                        <th>Judul</th>
+                        <th>Kategori STEM</th>
+                        <th>Kategori Resources</th>
+                        <th>Deskripsi</th>
+                        <th>Link</th>
+                        <th>Image</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($resources as $item)
+                    <tr>
+                        <td class="center-text">{{ $loop->iteration }}</td>
+                        <td>{{ $item->title }}</td>
+                        <td class="center-text"><span class="cell-badge">{{ $item->category_stem }}</span></td>
+                        <td class="center-text"><span class="cell-badge">{{ $item->category_resource }}</span></td>
+                        <td class="description-cell">
+                            <div class="text-clamp">
+                                {{ $item->description }}
+                            </div>
+                            <button class="btn btn-link btn-sm p-0 read-more">Selengkapnya</button>
+                        </td>
+                        <td class="center-text"><a href="{{ $item->link }}" class="text-primary">Kunjungi</a></td>
+                        <td class="center-text"><img src="{{ asset('storage/resources/' . $item->image) }}" width="60"></td>
+                        <td class="actions-cell">
+                        
+                            <!-- Tombol EDIT -->
+                            <a href="{{ route('resources.edit', $item->id) }}" class="btn btn-sm btn-edit" title="Edit">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                        
+                            <!-- Tombol DELETE -->
+                            <form action="{{ route('resources.destroy', $item->id) }}" method="POST" class="d-inline m-0 p-0">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-delete" title="Delete"onclick="return confirm('Hapus item ini?')">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        
+                        </td>
+
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
 
 <!-- Footer -->
 <footer class="pt-5 border-top">
-
     <div class="container">
-
         <div class="row footer-columns">
 
-            <!-- Discover -->
             <div class="col-6 col-md-2">
                 <h6 class="text-uppercase">Discover</h6>
                 <ul class="list-unstyled">
@@ -394,7 +405,6 @@
                 </ul>
             </div>
 
-            <!-- Community -->
             <div class="col-6 col-md-2">
                 <h6 class="text-uppercase">Community</h6>
                 <ul class="list-unstyled">
@@ -403,7 +413,6 @@
                 </ul>
             </div>
 
-            <!-- Create -->
             <div class="col-6 col-md-2">
                 <h6 class="text-uppercase">Create</h6>
                 <ul class="list-unstyled">
@@ -412,7 +421,6 @@
                 </ul>
             </div>
 
-            <!-- Services -->
             <div class="col-6 col-md-2">
                 <h6 class="text-uppercase">Our Services</h6>
                 <ul class="list-unstyled">
@@ -423,7 +431,6 @@
                 </ul>
             </div>
 
-            <!-- My Account -->
             <div class="col-6 col-md-2">
                 <h6 class="text-uppercase">My Account</h6>
                 <ul class="list-unstyled">
@@ -433,7 +440,6 @@
                 </ul>
             </div>
 
-            <!-- Newsletter + Social -->
             <div class="col-6 col-md-2">
                 <h6 class="text-uppercase">Newsletter</h6>
                 <button class="btn btn-success btn-sm w-100 mb-3">Subscribe</button>
@@ -455,7 +461,6 @@
 
         </div>
 
-        <!-- Kebijakan -->
         <div class="footer-policy mt-4 pb-3 d-flex flex-wrap gap-3 small">
             <a href="#" class="footer-link">Privacy Policy</a>
             <a href="#" class="footer-link">Terms of Service</a>
@@ -465,7 +470,6 @@
 
     </div>
 
-    <!-- FOOTER BAWAH -->
     <div class="footer-bottom-full mt-4">
         <div class="container">
             <div class="row align-items-center text-center text-md-start">
@@ -480,16 +484,38 @@
                 </div>
 
                 <div class="col-md-4 text-md-end">
-                    <img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"
-                        width="90">
+                    <img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png" width="90">
                 </div>
 
             </div>
         </div>
     </div>
-
 </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    
+document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('.read-more');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            const td = this.closest('td');
+            const clamp = td.querySelector('.text-clamp');
+
+            if (clamp.style.display === 'block') {
+                clamp.style.display = '-webkit-box';
+                this.textContent = 'Selengkapnya';
+            } else {
+                clamp.style.display = 'block';
+                this.textContent = 'Tutup';
+            }
+        });
+    });
+});
+
+</script>
+
 </body>
 </html>

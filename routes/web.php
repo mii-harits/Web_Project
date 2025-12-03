@@ -28,4 +28,8 @@ Route::get('/create', function () {
 Route::middleware('auth')->group(function() {
     Route::get('/stem', [ResourceController::class, 'index'])->name('stem');
     Route::post('/create', [ResourceController::class, 'store'])->name('create.store');
+
+    Route::get('/resources/{id}/edit', [ResourceController::class, 'edit'])->name('resources.edit');
+    Route::put('/resources/{id}', [ResourceController::class, 'update'])->name('resources.update');
+    Route::delete('/resources/{id}', [ResourceController::class, 'destroy'])->name('resources.destroy'); 
 });
