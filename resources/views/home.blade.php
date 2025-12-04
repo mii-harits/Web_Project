@@ -230,7 +230,7 @@
 
         <!-- LEFT (LOGO) -->
         <a class="navbar-brand fw-bold" href="{{ route('home') }}">
-            <img src="https://oercommons.org/static/newdesign/images/logo-hidpi-square.png" width="38">
+            {{-- <img src="https://oercommons.org/static/newdesign/images/logo-hidpi-square.png" width="38"> --}}
             STEM Center
         </a>
 
@@ -293,19 +293,28 @@
         <div class="row g-4 justify-content-center">
             @forelse ($stemResources as $resource)
                 <div class="col-md-6 col-lg-3">
-                    <div class="resource-card">
-                        <img src="{{ asset('storage/resources/' . $resource->image) }}"
-                        class="resource-img"
-                        alt="{{ $resource->title }}">
-                        <div class="p-3">
-                            <div class="resource-title">
-                                {{ $resource->title }}
-                            </div>
-                            <div class="resource-count">
-                                {{ $resource->category_resource }}
+                    @if ($resource->link)
+                        <a href="{{ $resource->link }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-decoration-none text-reset">
+                    @endif
+                        <div class="resource-card">
+                            <img src="{{ asset('storage/resources/' . $resource->image) }}"
+                            class="resource-img"
+                            alt="{{ $resource->title }}">
+                            <div class="p-3">
+                                <div class="resource-title">
+                                    {{ $resource->title }}
+                                </div>
+                                <div class="resource-count">
+                                    {{ $resource->category_resource }}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        @if ($resource->link)
+                            </a>
+                        @endif
                 </div>
             @empty
                 <p class="text-center">
@@ -329,19 +338,28 @@
         <div class="row g-4 justify-content-center">
             @forelse ($learningResources as $resource)
                 <div class="col-md-6 col-lg-3">
-                    <div class="resource-card">
-                        <img src="{{ asset('storage/resources/' . $resource->image) }}"
-                        class="resource-img"
-                        alt="{{ $resource->title }}">
-                        <div class="p-3">
-                            <div class="resource-title">
-                                {{ $resource->title }}
-                            </div>
-                            <div class="resource-count">
-                                {{ $resource->category_resource }}
+                    @if ($resource->link)
+                        <a href="{{ $resource->link }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-decoration-none text-reset">
+                    @endif
+                        <div class="resource-card">
+                            <img src="{{ asset('storage/resources/' . $resource->image) }}"
+                            class="resource-img"
+                            alt="{{ $resource->title }}">
+                            <div class="p-3">
+                                <div class="resource-title">
+                                    {{ $resource->title }}
+                                </div>
+                                <div class="resource-count">
+                                    {{ $resource->category_resource }}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        @if ($resource->link)
+                            </a>
+                        @endif
                 </div>
             @empty
                 <p class="text-center">
@@ -365,19 +383,28 @@
         <div class="row g-4 justify-content-center">
             @forelse ($futureResources as $resource)
                 <div class="col-md-6 col-lg-3">
-                    <div class="resource-card">
-                        <img src="{{ asset('storage/resources/' . $resource->image) }}"
-                        class="resource-img"
-                        alt="{{ $resource->title }}">
-                        <div class="p-3">
-                            <div class="resource-title">
-                                {{ $resource->title }}
-                            </div>
-                            <div class="resource-count">
-                                {{ $resource->category_resource }}
+                    @if ($resource->link)
+                        <a href="{{ $resource->link }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-decoration-none text-reset">
+                    @endif
+                        <div class="resource-card">
+                            <img src="{{ asset('storage/resources/' . $resource->image) }}"
+                            class="resource-img"
+                            alt="{{ $resource->title }}">
+                            <div class="p-3">
+                                <div class="resource-title">
+                                    {{ $resource->title }}
+                                </div>
+                                <div class="resource-count">
+                                    {{ $resource->category_resource }}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        @if ($resource->link)
+                            </a>
+                        @endif
                 </div>
             @empty
                 <p class="text-center">
@@ -399,19 +426,28 @@
         <div class="row g-4 justify-content-center">
             @forelse ($providerResources as $resource)
                 <div class="col-md-6 col-lg-3">
-                    <div class="resource-card">
-                        <img src="{{ asset('storage/resources/' . $resource->image) }}"
-                        class="resource-img"
-                        alt="{{ $resource->title }}">
-                        <div class="p-3">
-                            <div class="resource-title">
-                                {{ $resource->title }}
-                            </div>
-                            <div class="resource-count">
-                                {{ $resource->category_resource }}
+                    @if ($resource->link)
+                        <a href="{{ $resource->link }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-decoration-none text-reset">
+                    @endif
+                        <div class="resource-card">
+                            <img src="{{ asset('storage/resources/' . $resource->image) }}"
+                            class="resource-img"
+                            alt="{{ $resource->title }}">
+                            <div class="p-3">
+                                <div class="resource-title">
+                                    {{ $resource->title }}
+                                </div>
+                                <div class="resource-count">
+                                    {{ $resource->category_resource }}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        @if ($resource->link)
+                            </a>
+                        @endif
                 </div>
             @empty
                 <p class="text-center">
@@ -429,35 +465,35 @@
         <div class="row footer-columns">
 
             <!-- Discover -->
-            <div class="col-6 col-md-2">
+            {{-- <div class="col-6 col-md-2">
                 <h6 class="text-uppercase">Discover</h6>
                 <ul class="list-unstyled">
                     <li><a class="footer-link" href="#">Resources</a></li>
                     <li><a class="footer-link" href="#">Collections</a></li>
                     <li><a class="footer-link" href="#">Providers</a></li>
                 </ul>
-            </div>
+            </div> --}}
 
             <!-- Community -->
-            <div class="col-6 col-md-2">
+            {{-- <div class="col-6 col-md-2">
                 <h6 class="text-uppercase">Community</h6>
                 <ul class="list-unstyled">
                     <li><a class="footer-link" href="#">All Hubs</a></li>
                     <li><a class="footer-link" href="#">All Groups</a></li>
                 </ul>
-            </div>
+            </div> --}}
 
             <!-- Create -->
-            <div class="col-6 col-md-2">
+            {{-- <div class="col-6 col-md-2">
                 <h6 class="text-uppercase">Create</h6>
                 <ul class="list-unstyled">
                     <li><a class="footer-link" href="#">Open Author</a></li>
                     <li><a class="footer-link" href="#">Submit a Resource</a></li>
                 </ul>
-            </div>
+            </div> --}}
 
             <!-- Services -->
-            <div class="col-6 col-md-2">
+            {{-- <div class="col-6 col-md-2">
                 <h6 class="text-uppercase">Our Services</h6>
                 <ul class="list-unstyled">
                     <li><a class="footer-link" href="#">About Hubs</a></li>
@@ -465,20 +501,20 @@
                     <li><a class="footer-link" href="#">OER 101</a></li>
                     <li><a class="footer-link" href="#">Help Center</a></li>
                 </ul>
-            </div>
+            </div> --}}
 
             <!-- My Account -->
-            <div class="col-6 col-md-2">
+            {{-- <div class="col-6 col-md-2">
                 <h6 class="text-uppercase">My Account</h6>
                 <ul class="list-unstyled">
                     <li><a class="footer-link" href="#">My Items</a></li>
                     <li><a class="footer-link" href="#">My Groups</a></li>
                     <li><a class="footer-link" href="#">My Hubs</a></li>
                 </ul>
-            </div>
+            </div> --}}
 
             <!-- Newsletter + Social -->
-            <div class="col-6 col-md-2">
+            {{-- <div class="col-6 col-md-2">
                 <h6 class="text-uppercase">Newsletter</h6>
                 <button class="btn btn-success btn-sm w-100 mb-3">Subscribe</button>
 
@@ -495,7 +531,7 @@
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Iskme-logo.png/300px-Iskme-logo.png"
                         width="90" class="mt-1">
                 </div>
-            </div>
+            </div> --}}
 
         </div>
 
@@ -515,12 +551,12 @@
             <div class="row align-items-center text-center text-md-start">
 
                 <div class="col-md-4 mb-3 mb-md-0">
-                    © 2007 - 2025, OER Commons
+                    © 2025, Centre Steam
                 </div>
 
                 <div class="col-md-4 mb-3 mb-md-0 small">
-                    <div>A project created by ISKME.</div>
-                    <div>Content is licensed under Creative Commons BY-NC-SA 4.0.</div>
+                    <div></div>
+                    <div></div>
                 </div>
 
                 <div class="col-md-4 text-md-end">
