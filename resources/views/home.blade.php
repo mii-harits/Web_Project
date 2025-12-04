@@ -294,9 +294,9 @@
             @forelse ($stemResources as $resource)
                 <div class="col-md-6 col-lg-3">
                     <div class="resource-card">
-                        <img src="{{ $resource->image }}"
-                            class="resource-img"
-                            alt="{{ $resource->title }}">
+                        <img src="{{ asset('storage/resources/' . $resource->image) }}"
+                        class="resource-img"
+                        alt="{{ $resource->title }}">
                         <div class="p-3">
                             <div class="resource-title">
                                 {{ $resource->title }}
@@ -330,9 +330,9 @@
             @forelse ($learningResources as $resource)
                 <div class="col-md-6 col-lg-3">
                     <div class="resource-card">
-                        <img src="{{ $resource->image }}"
-                            class="resource-img"
-                            alt="{{ $resource->title }}">
+                        <img src="{{ asset('storage/resources/' . $resource->image) }}"
+                        class="resource-img"
+                        alt="{{ $resource->title }}">
                         <div class="p-3">
                             <div class="resource-title">
                                 {{ $resource->title }}
@@ -366,9 +366,9 @@
             @forelse ($futureResources as $resource)
                 <div class="col-md-6 col-lg-3">
                     <div class="resource-card">
-                        <img src="{{ $resource->image }}"
-                            class="resource-img"
-                            alt="{{ $resource->title }}">
+                        <img src="{{ asset('storage/resources/' . $resource->image) }}"
+                        class="resource-img"
+                        alt="{{ $resource->title }}">
                         <div class="p-3">
                             <div class="resource-title">
                                 {{ $resource->title }}

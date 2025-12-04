@@ -439,7 +439,7 @@
                             </div>
                             <button class="btn btn-link btn-sm p-0 read-more">Selengkapnya</button>
                         </td>
-                        <td class="center-text"><a href="{{ $item->link }}" class="text-primary">Kunjungi</a></td>
+                        <td class="center-text"><a href="{{ $item->link }}" class="text-primary" target="_blank">Kunjungi</a></td>
                         <td class="center-text"><img src="{{ asset('storage/resources/' . $item->image) }}" width="60"></td>
                         <td class="actions-cell">
                         
