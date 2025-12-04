@@ -241,7 +241,7 @@ document.querySelectorAll('.glass-input input, .glass-input textarea').forEach(i
     input.addEventListener('focus', () => {
         label.style.opacity = '1';
         label.style.visibility = 'visible';
-        label.style.top = '-12px'; // naik lebih tinggi
+        label.style.top = '-12px';
     });
 
     input.addEventListener('blur', () => {
@@ -252,8 +252,7 @@ document.querySelectorAll('.glass-input input, .glass-input textarea').forEach(i
     input.addEventListener('keydown', e => {
         if(e.key === 'Enter'){
             e.preventDefault();
-            input.blur(); // hilangkan label saat Enter
-            // fokus ke field berikutnya
+            input.blur();
             const formFields = Array.from(document.querySelectorAll('.glass-input input, .glass-input textarea'));
             const idx = formFields.indexOf(input);
             if(idx < formFields.length - 1) formFields[idx+1].focus();
@@ -268,7 +267,6 @@ const fileText = document.getElementById('file-text');
 
 // Klik drop-zone
 dropZone.addEventListener('click', (e) => {
-    // Jika klik input, jangan trigger click lagi
     if (e.target !== inputFile) {
         inputFile.click();
     }
@@ -280,10 +278,9 @@ inputFile.addEventListener('change', () => {
 
         const file = inputFile.files[0];
 
-        // VALIDASI SIZE : 10 MB (10 * 1024 * 1024)
         if (file.size > 10 * 1024 * 1024) {
             alert("Ukuran file melebihi 10 MB. Upload dibatalkan!");
-            inputFile.value = "";  // reset input
+            inputFile.value = "";
             fileText.style.display = 'block';
             preview.style.display = 'none';
             return;
@@ -302,17 +299,25 @@ inputFile.addEventListener('change', () => {
     }
 });
 
-// Drag & drop
+// Drag & drop (FIXED)
 dropZone.addEventListener('dragover', e => { 
     e.preventDefault(); 
     dropZone.classList.add('dragover'); 
 });
 dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+
 dropZone.addEventListener('drop', e => {
     e.preventDefault(); 
     dropZone.classList.remove('dragover');
-    if(e.dataTransfer.files && e.dataTransfer.files[0]){
-        inputFile.files = e.dataTransfer.files;
+
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+
+        // ✅ FIX: Gunakan DataTransfer agar file bisa masuk ke input
+        const dt = new DataTransfer();
+        dt.items.add(e.dataTransfer.files[0]);
+        inputFile.files = dt.files;
+
+        // Trigger change handler
         inputFile.dispatchEvent(new Event('change'));
     }
 });

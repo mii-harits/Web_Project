@@ -10,7 +10,7 @@ class ResourceController extends Controller
 {
     public function index()
     {
-        $resources = Resource::orderBy('id', 'desc')->paginate(5); 
+        $resources = Resource::orderBy('id', 'desc')->paginate(15); 
         return view('stem', compact('resources'));
     }
 

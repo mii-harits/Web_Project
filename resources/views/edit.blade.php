@@ -208,12 +208,16 @@ body::before {
         <div class="glass-input">
             <label>Upload Gambar</label>
             <div class="drop-zone" id="drop-zone">
-                <span id="file-text" style="{{ $resource->image ? 'display:none;' : '' }}">
+                <span id="file-text" style="{{ $resource->image ? '' : '' }}">
                     Upload Gambar Baru (Optional)
                 </span>
-            
-                <input type="file" id="image" name="image" accept="image/*">
                 
+                <input type="file" id="image" name="image" accept="image/*" style="display:none;">
+                
+                <span id="file-label" style="color:#fff;">
+                    {{ $resource->image ?? 'Pilih File' }}
+                </span>
+            
                 <!-- PREVIEW DEFAULT: jika ada gambar lama, tampilkan -->
                 <img id="preview"
                      src="{{ $resource->image ? asset('storage/resources/' . $resource->image) : '' }}"
@@ -317,25 +321,44 @@ dropZone.addEventListener('dragover', e => {
     dropZone.classList.add('dragover'); 
 });
 dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+
 dropZone.addEventListener('drop', e => {
     e.preventDefault(); 
     dropZone.classList.remove('dragover');
-    if(e.dataTransfer.files && e.dataTransfer.files[0]){
-        inputFile.files = e.dataTransfer.files;
+
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+
+        // ✅ FIX: Gunakan DataTransfer agar file bisa masuk ke input
+        const dt = new DataTransfer();
+        dt.items.add(e.dataTransfer.files[0]);
+        inputFile.files = dt.files;
+
+        // Trigger change handler
         inputFile.dispatchEvent(new Event('change'));
     }
 });
 
 document.getElementById('image').addEventListener('change', function () {
-    let fileName = this.files[0]?.name || 'Pilih File';
-    document.getElementById('file-label').innerText = fileName;
 
-    // Preview
+    const fileText = document.getElementById('file-text');
+    const fileLabel = document.getElementById('file-label');
+    const preview = document.getElementById('preview');
+
+    // Jika user memilih file baru
     if (this.files[0]) {
+        let fileName = this.files[0].name;
+
+        // Sembunyikan teks "Upload Gambar Baru"
+        fileText.style.display = 'none';
+
+        // Update label nama file
+        fileLabel.innerText = fileName;
+
+        // Preview baru
         let reader = new FileReader();
         reader.onload = function (e) {
-            document.getElementById('preview').src = e.target.result;
-            document.getElementById('preview').style.display = 'block';
+            preview.src = e.target.result;
+            preview.style.display = 'block';
         }
         reader.readAsDataURL(this.files[0]);
     }
