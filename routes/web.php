@@ -3,10 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DstnController;
 
-Route::get('/', function () {
-    return view('home');
-})->middleware('guest')->name('landing');
+Route::get('/', [DstnController::class, 'index'])
+    ->middleware('guest')
+    ->name('landing');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login.process');

@@ -291,52 +291,29 @@
         </div>
 
         <div class="row g-4 justify-content-center">
-
-            <div class="col-md-6 col-lg-3">
-                <div class="resource-card">
-                    <img src="https://img.oercommons.org/365x280/oercommons/media/upload/landingpages/featured-items/PBL.png"
-                        class="resource-img">
-                    <div class="p-3">
-                        <div class="resource-title">Problem-Based Learning</div>
-                        <div class="resource-count">609 Resources</div>
+            @forelse ($stemResources as $resource)
+                <div class="col-md-6 col-lg-3">
+                    <div class="resource-card">
+                        <img src="{{ $resource->image }}"
+                            class="resource-img"
+                            alt="{{ $resource->title }}">
+                        <div class="p-3">
+                            <div class="resource-title">
+                                {{ $resource->title }}
+                            </div>
+                            <div class="resource-count">
+                                {{ $resource->category_resource }}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="resource-card">
-                    <img src="https://img.oercommons.org/365x280/oercommons/media/upload/landingpages/featured-items/Math-formulas.jpg"
-                        class="resource-img">
-                    <div class="p-3">
-                        <div class="resource-title">Open Access STEM Journals</div>
-                        <div class="resource-count">8 Resources</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="resource-card">
-                    <img src="https://images.unsplash.com/photo-1581091215367-59ab6c6a2c39?auto=format&fit=crop&w=900&q=70"
-                        class="resource-img">
-                    <div class="p-3">
-                        <div class="resource-title">Building Text Dependent Questions</div>
-                        <div class="resource-count">4 Resources</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="resource-card">
-                    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=70"
-                        class="resource-img">
-                    <div class="p-3">
-                        <div class="resource-title">Building Text Sets</div>
-                        <div class="resource-count">5 Resources</div>
-                    </div>
-                </div>
-            </div>
-
+            @empty
+                <p class="text-center">
+                    Belum ada resource untuk kategori ini.
+                </p>
+            @endforelse
         </div>
+
     </div>
 
     <!-- MODERN DIVIDER -->
@@ -350,98 +327,29 @@
         </div>
 
         <div class="row g-4 justify-content-center">
-
-            <div class="col-md-6 col-lg-3">
-                <div class="resource-card">
-                    <img src="https://images.unsplash.com/photo-1581092334802-39d4c28a5aa1?auto=format&fit=crop&w=900&q=70"
-                        class="resource-img">
-                    <div class="p-3">
-                        <div class="resource-title">Mathematics Textbooks</div>
-                        <div class="resource-count">565 Resources</div>
+            @forelse ($learningResources as $resource)
+                <div class="col-md-6 col-lg-3">
+                    <div class="resource-card">
+                        <img src="{{ $resource->image }}"
+                            class="resource-img"
+                            alt="{{ $resource->title }}">
+                        <div class="p-3">
+                            <div class="resource-title">
+                                {{ $resource->title }}
+                            </div>
+                            <div class="resource-count">
+                                {{ $resource->category_resource }}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="resource-card">
-                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3fcd?auto=format&fit=crop&w=900&q=70"
-                        class="resource-img">
-                    <div class="p-3">
-                        <div class="resource-title">Life Science Courses</div>
-                        <div class="resource-count">921 Resources</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="resource-card">
-                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=900&q=70"
-                        class="resource-img">
-                    <div class="p-3">
-                        <div class="resource-title">Physical Science Modules</div>
-                        <div class="resource-count">112 Resources</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="resource-card">
-                    <img src="https://images.unsplash.com/photo-1509223197845-458d87318791?auto=format&fit=crop&w=900&q=70"
-                        class="resource-img">
-                    <div class="p-3">
-                        <div class="resource-title">Applied Science Materials</div>
-                        <div class="resource-count">308 Resources</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="resource-card">
-                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=900&q=70"
-                        class="resource-img">
-                    <div class="p-3">
-                        <div class="resource-title">Physical Science Modules</div>
-                        <div class="resource-count">112 Resources</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="resource-card">
-                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=900&q=70"
-                        class="resource-img">
-                    <div class="p-3">
-                        <div class="resource-title">Physical Science Modules</div>
-                        <div class="resource-count">112 Resources</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="resource-card">
-                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=900&q=70"
-                        class="resource-img">
-                    <div class="p-3">
-                        <div class="resource-title">Physical Science Modules</div>
-                        <div class="resource-count">112 Resources</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="resource-card">
-                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=900&q=70"
-                        class="resource-img">
-                    <div class="p-3">
-                        <div class="resource-title">Physical Science Modules</div>
-                        <div class="resource-count">112 Resources</div>
-                    </div>
-                </div>
-            </div>
-
-            
-
+            @empty
+                <p class="text-center">
+                    Belum ada resource untuk kategori ini.
+                </p>
+            @endforelse
         </div>
+
     </div>
 
     <!-- MODERN DIVIDER -->
@@ -450,45 +358,32 @@
     <!-- SECTION 3 -->
     <div class="container pb-5">
         <div class="section-header">
-            <h2>STEM Learning Resources</h2>
-            <p>High-quality textbooks, guides, and open learning content for all STEM fields.</p>
+            <h2>Building STEM Futures</h2>
+            <p>Whether you are preparing for college, pursuing a career in STEM, or want to engage in your local community as a citizen scientist, there are many ways to engage and learn.</p>
         </div>
 
         <div class="row g-4 justify-content-center">
-
-            <div class="col-md-6 col-lg-3">
-                <div class="resource-card">
-                    <img src="https://images.unsplash.com/photo-1581092334802-39d4c28a5aa1?auto=format&fit=crop&w=900&q=70"
-                        class="resource-img">
-                    <div class="p-3">
-                        <div class="resource-title">Mathematics Textbooks</div>
-                        <div class="resource-count">565 Resources</div>
+            @forelse ($futureResources as $resource)
+                <div class="col-md-6 col-lg-3">
+                    <div class="resource-card">
+                        <img src="{{ $resource->image }}"
+                            class="resource-img"
+                            alt="{{ $resource->title }}">
+                        <div class="p-3">
+                            <div class="resource-title">
+                                {{ $resource->title }}
+                            </div>
+                            <div class="resource-count">
+                                {{ $resource->category_resource }}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="resource-card">
-                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3fcd?auto=format&fit=crop&w=900&q=70"
-                        class="resource-img">
-                    <div class="p-3">
-                        <div class="resource-title">Life Science Courses</div>
-                        <div class="resource-count">921 Resources</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="resource-card">
-                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=900&q=70"
-                        class="resource-img">
-                    <div class="p-3">
-                        <div class="resource-title">Physical Science Modules</div>
-                        <div class="resource-count">112 Resources</div>
-                    </div>
-                </div>
-            </div>
-
+            @empty
+                <p class="text-center">
+                    Belum ada resource untuk kategori ini.
+                </p>
+            @endforelse
         </div>
     </div>
 
@@ -498,89 +393,31 @@
     <!-- SECTION 4 -->
     <div class="container pb-5">
         <div class="section-header">
-            <h2>STEM Learning Resources</h2>
-            <p>High-quality textbooks, guides, and open learning content for all STEM fields.</p>
+            <h2>Featured STEM Providers</h2>
         </div>
 
         <div class="row g-4 justify-content-center">
-
-            <div class="col-md-6 col-lg-3">
-                <div class="resource-card">
-                    <img src="https://images.unsplash.com/photo-1581092334802-39d4c28a5aa1?auto=format&fit=crop&w=900&q=70"
-                        class="resource-img">
-                    <div class="p-3">
-                        <div class="resource-title">Mathematics Textbooks</div>
-                        <div class="resource-count">565 Resources</div>
+            @forelse ($providerResources as $resource)
+                <div class="col-md-6 col-lg-3">
+                    <div class="resource-card">
+                        <img src="{{ $resource->image }}"
+                            class="resource-img"
+                            alt="{{ $resource->title }}">
+                        <div class="p-3">
+                            <div class="resource-title">
+                                {{ $resource->title }}
+                            </div>
+                            <div class="resource-count">
+                                {{ $resource->category_resource }}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="resource-card">
-                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3fcd?auto=format&fit=crop&w=900&q=70"
-                        class="resource-img">
-                    <div class="p-3">
-                        <div class="resource-title">Life Science Courses</div>
-                        <div class="resource-count">921 Resources</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="resource-card">
-                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=900&q=70"
-                        class="resource-img">
-                    <div class="p-3">
-                        <div class="resource-title">Physical Science Modules</div>
-                        <div class="resource-count">112 Resources</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="resource-card">
-                    <img src="https://images.unsplash.com/photo-1509223197845-458d87318791?auto=format&fit=crop&w=900&q=70"
-                        class="resource-img">
-                    <div class="p-3">
-                        <div class="resource-title">Applied Science Materials</div>
-                        <div class="resource-count">308 Resources</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="resource-card">
-                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=900&q=70"
-                        class="resource-img">
-                    <div class="p-3">
-                        <div class="resource-title">Physical Science Modules</div>
-                        <div class="resource-count">112 Resources</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="resource-card">
-                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=900&q=70"
-                        class="resource-img">
-                    <div class="p-3">
-                        <div class="resource-title">Physical Science Modules</div>
-                        <div class="resource-count">112 Resources</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="resource-card">
-                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=900&q=70"
-                        class="resource-img">
-                    <div class="p-3">
-                        <div class="resource-title">Physical Science Modules</div>
-                        <div class="resource-count">112 Resources</div>
-                    </div>
-                </div>
-            </div>
-
+            @empty
+                <p class="text-center">
+                    Belum ada provider untuk kategori ini.
+                </p>
+            @endforelse
         </div>
     </div>
 
