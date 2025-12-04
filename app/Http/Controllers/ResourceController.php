@@ -10,7 +10,7 @@ class ResourceController extends Controller
 {
     public function index()
     {
-        $resources = Resource::all();
+        $resources = Resource::orderBy('id', 'desc')->paginate(5); 
         return view('stem', compact('resources'));
     }
 
@@ -20,17 +20,17 @@ class ResourceController extends Controller
             'category_stem' => 'required|string|max:255',
             'category_resource' => 'required|string|max:255',
             'title' => 'required|string|max:255',
+            'link' => 'string|url',
             'description' => 'nullable|string',
-            'link' => 'nullable|url',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:4096'
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:10240'
         ]);
 
         $data = $request->only([
            'category_stem',
            'category_resource',
            'title',
-           'description',
-           'link'
+           'link',
+           'description'
         ]);
 
          if ($request->hasFile('image') && $request->file('image')->isValid()) {
@@ -73,8 +73,8 @@ class ResourceController extends Controller
             'category_stem',
             'category_resource',
             'title',
-            'description',
-            'link'
+            'link',
+            'description'
         ]);
 
         if ($request->hasFile('image')) {

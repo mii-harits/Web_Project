@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tambah Buku - Glassmorphism</title>
+<title>STEM Literacy | OER Commons</title>
+<link rel="icon" type="image/png" href="https://oercommons.org/static/images/favicon.ico">
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
@@ -86,17 +88,35 @@ body::before {
 
 /* Drag & Drop */
 .drop-zone {
+    position: relative;
     padding: 25px;
     border: 2px dashed rgba(255,255,255,0.6);
     border-radius: 12px;
     text-align: center;
     color: #fff;
     cursor: pointer;
-    transition: all 0.3s ease;
     background: rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
 }
-.drop-zone.dragover { background: rgba(255,255,255,0.2); transform: scale(1.02);}
-.drop-zone img { max-width: 100%; margin-top: 15px; border-radius: 10px;}
+.drop-zone.dragover { 
+    background: rgba(255,255,255,0.2); 
+    transform: scale(1.02);
+    border-color: #00c3ff;
+}
+.drop-zone img {
+    max-width: 100%;
+    margin-top: 15px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+.drop-zone span {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}  
 
 /* Button */
 .btn-glass {
@@ -120,6 +140,31 @@ body::before {
     transform: translateY(0);
     box-shadow: 0 0 10px rgba(255,255,255,0.3);
 }
+.btn-glass-red {
+    width: 30%;
+    padding: 12px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 0, 0, 0.8);
+    background: rgba(255, 0, 0, 0.3);
+    color: #fff;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+}
+
+.btn-glass-red:hover {
+    background: rgba(255, 50, 50, 0.4);
+    box-shadow: 0 0 15px rgba(255, 80, 80, 0.7);
+    transform: translateY(-2px);
+}
+
+.btn-glass-red:active {
+    transform: translateY(0);
+    box-shadow: 0 0 10px rgba(255, 80, 80, 0.4);
+}
 </style>
 </head>
 <body>
@@ -127,11 +172,10 @@ body::before {
     <h2 class="form-title">Edit Buku</h2>
     <form id="bookForm" action="{{ route('resources.update', $resource->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
-        @method('put')
 
         <!-- Judul -->
         <div class="glass-input">
-            <input type="text" id="title" name="title" value="{{ $resource->title }}" required placeholder="Judul" />
+            <input type="text" id="title" name="title" value="{{ $resource->title }}"  required placeholder="Judul" />
             <label for="title">Judul</label>
         </div>
 
@@ -146,33 +190,55 @@ body::before {
             <input type="text" id="category_resource" name="category_resource" value="{{ $resource->category_resource }}" required placeholder="Kategori Resource" />
             <label for="category_resource">Kategori Resource</label>
         </div>
-
+        
+        <!-- Link -->
+        <div class="glass-input">
+            <input type="url" id="link" name="link" value="{{ $resource->link }}" placeholder="Link" />
+            <label for="link">Link</label>
+        </div>
+        
         <!-- Deskripsi -->
         <div class="glass-input">
             <textarea id="description" name="description" rows="4" placeholder="Deskripsi">{{ $resource->description }}</textarea>
             <label for="description">Deskripsi</label>
         </div>
 
-        <!-- Link -->
-        <div class="glass-input">
-            <input type="url" id="link" name="link" value="{{ $resource->link }}" placeholder="Link" />
-            <label for="link">Link</label>
-        </div>
 
         <!-- Upload Image -->
         <div class="glass-input">
-            <label>Gambar Saat Ini:</label>
-            <img src="{{ asset('storage/resources/' . $resource->image) }}" width="150" class="mb-2">
-
+            <label>Upload Gambar</label>
             <div class="drop-zone" id="drop-zone">
-                <span>Upload Gambar Baru (Optional)</span>
+                <span id="file-text" style="{{ $resource->image ? 'display:none;' : '' }}">
+                    Upload Gambar Baru (Optional)
+                </span>
+            
                 <input type="file" id="image" name="image" accept="image/*">
-                <img id="preview" style="display:none;">
+                
+                <!-- PREVIEW DEFAULT: jika ada gambar lama, tampilkan -->
+                <img id="preview"
+                     src="{{ $resource->image ? asset('storage/resources/' . $resource->image) : '' }}"
+                     alt="Preview"
+                     style="display: {{ $resource->image ? 'block' : 'none' }}; margin-top:10px; border-radius:12px;">
+                
+                <small style="display:block; margin-top:5px; color: rgba(255,255,255,0.7); font-size: 0.85rem;">
+                    Max Size: 10 MB
+                </small>
             </div>
+
+            <!-- Error Laravel -->
+            @error('image')
+                <div class="text-danger" style="margin-top:10px; font-weight:600;">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
-        
-        <button type="submit" class="btn-glass">Update Buku</button>
+        <div class="d-flex justify-content-end mt-3">
+            <a href="{{ route('stem') }}" class="btn-glass-red me-2">
+                Cancel
+            </a>
+            <button type="submit" class="btn-glass">Update Buku</button>
+        </div>
     </form>
 </div>
 
@@ -204,30 +270,77 @@ document.querySelectorAll('.glass-input input, .glass-input textarea').forEach(i
     });
 });
 
-// Drag & Drop
 const dropZone = document.getElementById('drop-zone');
 const inputFile = dropZone.querySelector('input');
 const preview = document.getElementById('preview');
+const fileText = document.getElementById('file-text');
 
-dropZone.addEventListener('click', () => inputFile.click());
+// Klik drop-zone
+dropZone.addEventListener('click', (e) => {
+    // Jika klik input, jangan trigger click lagi
+    if (e.target !== inputFile) {
+        inputFile.click();
+    }
+});
+
+// Input change
 inputFile.addEventListener('change', () => {
     if(inputFile.files && inputFile.files[0]){
+
+        const file = inputFile.files[0];
+
+        // VALIDASI SIZE : 10 MB (10 * 1024 * 1024)
+        if (file.size > 10 * 1024 * 1024) {
+            alert("Ukuran file melebihi 10 MB. Upload dibatalkan!");
+            inputFile.value = "";  // reset input
+            fileText.style.display = 'block';
+            preview.style.display = 'none';
+            return;
+        }
+
+        fileText.style.display = '';
+        preview.style.display = 'block';
+
         const reader = new FileReader();
-        reader.onload = e => { preview.src = e.target.result; preview.style.display='block'; }
-        reader.readAsDataURL(inputFile.files[0]);
+        reader.onload = e => preview.src = e.target.result;
+        reader.readAsDataURL(file);
+
+    } else {
+        fileText.style.display = 'block';
+        preview.style.display = 'none';
     }
 });
 
-dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+// Drag & drop
+dropZone.addEventListener('dragover', e => { 
+    e.preventDefault(); 
+    dropZone.classList.add('dragover'); 
+});
 dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
 dropZone.addEventListener('drop', e => {
-    e.preventDefault(); dropZone.classList.remove('dragover');
+    e.preventDefault(); 
+    dropZone.classList.remove('dragover');
     if(e.dataTransfer.files && e.dataTransfer.files[0]){
-        const reader = new FileReader();
-        reader.onload = e => { preview.src = e.target.result; preview.style.display='block'; }
-        reader.readAsDataURL(e.dataTransfer.files[0]);
+        inputFile.files = e.dataTransfer.files;
+        inputFile.dispatchEvent(new Event('change'));
     }
 });
+
+document.getElementById('image').addEventListener('change', function () {
+    let fileName = this.files[0]?.name || 'Pilih File';
+    document.getElementById('file-label').innerText = fileName;
+
+    // Preview
+    if (this.files[0]) {
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById('preview').src = e.target.result;
+            document.getElementById('preview').style.display = 'block';
+        }
+        reader.readAsDataURL(this.files[0]);
+    }
+});
+
 </script>
 </body>
 </html>

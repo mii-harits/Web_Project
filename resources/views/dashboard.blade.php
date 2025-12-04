@@ -137,7 +137,7 @@
     <div class="nav-container">
 
         <!-- LEFT (LOGO) -->
-        <a class="navbar-brand fw-bold" href="">
+        <a class="navbar-brand fw-bold" href="{{ route('home') }}">
             <img src="https://oercommons.org/static/newdesign/images/logo-hidpi-square.png" width="38">
             STEM Center
         </a>

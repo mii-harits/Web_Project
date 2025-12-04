@@ -13,8 +13,8 @@ class Resource extends Model
         'category_stem',
         'category_resource',
         'title',
-        'description',
         'link',
+        'description',
         'image',
     ];
 }

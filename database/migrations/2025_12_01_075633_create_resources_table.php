@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('category_stem');
             $table->string('category_resource');
             $table->string('title');
+            $table->string('link');
             $table->text('description')->nullable();
-            $table->string('link')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
         });

@@ -116,6 +116,7 @@
             background: #fff;
             box-shadow: 0 6px 28px rgba(0,0,0,0.06);
             transition: 0.3s ease;
+            text-align: center;
         }
 
         .resource-card:hover {
@@ -228,7 +229,7 @@
     <div class="nav-container">
 
         <!-- LEFT (LOGO) -->
-        <a class="navbar-brand fw-bold" href="">
+        <a class="navbar-brand fw-bold" href="{{ route('home') }}">
             <img src="https://oercommons.org/static/newdesign/images/logo-hidpi-square.png" width="38">
             STEM Center
         </a>
@@ -289,7 +290,7 @@
             <p>Resources designed to prepare educators for collaborating across the curriculum to build STEM literacy, interest, and engagement that will inspire students toward STEM college and careers.</p>
         </div>
 
-        <div class="row g-4">
+        <div class="row g-4 justify-content-center">
 
             <div class="col-md-6 col-lg-3">
                 <div class="resource-card">
@@ -348,7 +349,7 @@
             <p>Find teaching materials that will help build interest in all students, regardless of their college or career pathway, to understand the role of STEM in their lives and to become informed citizens.</p>
         </div>
 
-        <div class="row g-4">
+        <div class="row g-4 justify-content-center">
 
             <div class="col-md-6 col-lg-3">
                 <div class="resource-card">
@@ -453,7 +454,7 @@
             <p>High-quality textbooks, guides, and open learning content for all STEM fields.</p>
         </div>
 
-        <div class="row g-4">
+        <div class="row g-4 justify-content-center">
 
             <div class="col-md-6 col-lg-3">
                 <div class="resource-card">
@@ -501,7 +502,7 @@
             <p>High-quality textbooks, guides, and open learning content for all STEM fields.</p>
         </div>
 
-        <div class="row g-4">
+        <div class="row g-4 justify-content-center">
 
             <div class="col-md-6 col-lg-3">
                 <div class="resource-card">

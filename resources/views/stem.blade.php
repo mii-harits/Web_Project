@@ -80,6 +80,34 @@
             padding-right: 40px;
         }
 
+        .btn-modern {
+            background: linear-gradient(135deg, #4e9af1, #1d6ef3);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 20px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(30, 144, 255, 0.3);
+            text-decoration: none; /* hilangkan underline jika <a> */
+        }
+
+        .btn-modern:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(30, 144, 255, 0.5);
+        }
+
+        .btn-modern i {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-modern:hover i {
+            transform: translateX(3px);
+        }
+
         /* ==============================
            TABLE
         =============================== */
@@ -224,6 +252,55 @@
         .btn-icon i {
             font-size: 14px;
         }
+        
+        /* PAGINATION PART */
+        .pagination .page-item .page-link {
+            color: #007bff;
+        }
+        .pagination .page-item.active .page-link {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .pagination-btn {
+            background: linear-gradient(135deg, #4e9af1, #1d6ef3);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 6px 18px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(30, 144, 255, 0.3);
+            text-decoration: none;
+        }
+
+        .pagination-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(30, 144, 255, 0.5);
+        }
+
+        .pagination-btn:disabled,
+        .pagination-btn[disabled] {
+            background: #ccc;
+            color: #666;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .pagination-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .pagination-btn:hover i {
+            transform: translateX(3px);
+        }
+
+        .pagination-info {
+            font-weight: 500;
+            color: #555;
+        }
 
         /* Footer styles */
         footer {
@@ -267,7 +344,7 @@
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg py-3 sticky-top shadow-sm">
     <div class="nav-container">
-        <a class="navbar-brand fw-bold" href="">
+        <a class="navbar-brand fw-bold" href="{{ route('home') }}">
             <img src="https://oercommons.org/static/newdesign/images/logo-hidpi-square.png" width="38">
             STEM Center
         </a>
@@ -318,7 +395,7 @@
         <!-- TITLE + ADD DATA -->
         <div class="d-flex justify-content-between align-items-center">
             <h3 class="fw-bold mb-0">Daftar Resources</h3>
-            <a href="{{ route('create') }}" class="btn btn-primary">+ Add Book</a>
+            <a href="{{ route('create') }}" class="btn btn-modern">+ Add New Book</a>
         </div>
 
         <p class="text-muted mt-2">Berikut daftar resource yang telah diupload.</p>
@@ -388,8 +465,44 @@
             </table>
         </div>
 
+        <!-- PAGINATION INFO -->
+        <div class="d-flex justify-content-between align-items-center mt-3 mb-5">
+
+            <!-- Info halaman dan total -->
+            <div class="pagination-info">
+                Page {{ $resources->currentPage() }} from {{ $resources->lastPage() }} |
+                Total {{ $resources->total() }} Books
+            </div>
+        
+            <!-- Tombol Previous / Next -->
+            <div>
+                @if ($resources->onFirstPage())
+                    <button class="pagination-btn" disabled>
+                        <i class="bi bi-chevron-left"></i> Previous
+                    </button>
+                @else
+                    <a href="{{ $resources->previousPageUrl() }}" class="pagination-btn">
+                        <i class="bi bi-chevron-left"></i> Previous
+                    </a>
+                @endif
+                
+                @if ($resources->hasMorePages())
+                    <a href="{{ $resources->nextPageUrl() }}" class="pagination-btn">
+                        Next <i class="bi bi-chevron-right"></i>
+                    </a>
+                @else
+                    <button class="pagination-btn" disabled>
+                        Next <i class="bi bi-chevron-right"></i>
+                    </button>
+                @endif
+            </div>
+        
+        </div>
+
     </div>
 </div>
+
+<div class="mb-5"></div>
 
 <!-- Footer -->
 <footer class="pt-5 border-top">
