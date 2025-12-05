@@ -22,7 +22,7 @@ class ResourceController extends Controller
             'title' => 'required|string|max:255',
             'link' => 'string|url',
             'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:10240'
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240'
         ]);
 
         $data = $request->only([
