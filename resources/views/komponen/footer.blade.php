@@ -92,7 +92,7 @@
             <div class="row align-items-center text-center text-md-start">
 
                 <div class="col-md-4 mb-3 mb-md-0">
-                    © 2025, Centre Steam
+                    © 2025, Centre Steam. Support by Nobelium
                 </div>
 
                 <div class="col-md-4 mb-3 mb-md-0 small">
