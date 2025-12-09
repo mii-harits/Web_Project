@@ -9,6 +9,9 @@ Route::get('/', [DstnController::class, 'index'])
     ->middleware('guest')
     ->name('landing');
 
+Route::get('/stem-resources/{stem}/{category}', [DstnController::class, 'showCategory'])
+    ->name('resources.category');
+
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login.process');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

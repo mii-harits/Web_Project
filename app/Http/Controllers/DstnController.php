@@ -25,43 +25,105 @@ class DstnController extends Controller
 
         // SECTION 2
         $learningResources = Resource::where('category_stem', 'STEM Learning Resources')
-            ->latest()
+            ->select(
+                'category_resource',
+                DB::raw('COUNT(*) as total_resources'),
+                DB::raw('MIN(link) as link'),
+                DB::raw('MIN(title) as title')
+            )
+            ->groupBy('category_resource')
+            ->orderBy('category_resource')
             ->limit(8)
             ->get();
-        
-        // Hitung jumlah resource per category_resource
-        $learningCounts = Resource::where('category_stem', 'STEM Learning Resources')
-            ->select('category_resource')
-            ->selectRaw('COUNT(*) as total')
-            ->groupBy('category_resource')
-            ->pluck('total', 'category_resource'); // hasil: ['Books' => 10, 'Modules' => 5, ...]
 
         // SECTION 3
         $futureResources = Resource::where('category_stem', 'Building STEM Futures')
-            ->latest()
+            ->select(
+                'category_resource',
+                DB::raw('COUNT(*) as total_resources'),
+                DB::raw('MIN(link) as link'),
+                DB::raw('MIN(title) as title')
+            )
+            ->groupBy('category_resource')
+            ->orderBy('category_resource')
             ->limit(8)
             ->get();
-        
-        // Hitung jumlah resource per category_resource
-        $futureCounts = Resource::where('category_stem', 'Building STEM Futures')
-            ->select('category_resource')
-            ->selectRaw('COUNT(*) as total')
-            ->groupBy('category_resource')
-            ->pluck('total', 'category_resource'); // hasil: ['Books' => 10, 'Modules' => 5, ...]
            
         // SECTION 4
         $providerResources = Resource::where('category_stem', 'Featured STEM Providers')
-            ->latest()
+            ->select(
+                'category_resource',
+                DB::raw('COUNT(*) as total_resources'),
+                DB::raw('MIN(link) as link'),
+                DB::raw('MIN(title) as title')
+            )
+            ->groupBy('category_resource')
+            ->orderBy('category_resource')
             ->limit(8)
             ->get();
 
-        // Hitung jumlah resource per category_resource
-        $providerCounts = Resource::where('category_stem', 'Featured STEM Providers')
-            ->select('category_resource')
-            ->selectRaw('COUNT(*) as total')
-            ->groupBy('category_resource')
-            ->pluck('total', 'category_resource'); // hasil: ['Books' => 10, 'Modules' => 5, ...]
+        return view('home', compact('stemResources', 'learningResources','futureResources', 'providerResources'));
+    }
 
-        return view('home', compact('stemResources', 'learningResources','futureResources', 'providerResources', 'learningCounts', 'futureCounts', 'providerCounts'));
+    public function showCategory(Request $request, $stem, $category)
+    {
+        // decode dari URL
+        $stem     = urldecode($stem);
+        $category = urldecode($category);
+
+        // base query
+        $query = Resource::where('category_stem', $stem)
+            ->where('category_resource', $category);
+
+        // filter & sort
+        $search  = $request->input('q');
+        $sort    = $request->input('sort', 'relevance');
+        $perPage = (int) $request->input('per_page', 20);
+
+        if (! in_array($perPage, [10, 20, 50, 100])) {
+            $perPage = 20;
+        }
+
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', '%' . $search . '%')
+                  ->orWhere('description', 'like', '%' . $search . '%');
+            });
+        }
+
+        switch ($sort) {
+            case 'newest':
+                $query->orderByDesc('created_at');
+                break;
+            case 'oldest':
+                $query->orderBy('created_at');
+                break;
+            case 'title':
+                $query->orderBy('title');
+                break;
+            default: // relevance
+                $query->orderByDesc('created_at');
+        }
+
+        // paginasi
+        $resources = $query->paginate($perPage)->withQueryString();
+        $totalResources = $resources->total();
+
+        // cover image & deskripsi singkat koleksi
+        $coverResource = Resource::where('category_stem', $stem)
+            ->where('category_resource', $category)
+            ->whereNotNull('image')
+            ->first();
+
+        $categoryDescription = $coverResource?->description;
+
+        return view('resources.detailResources', [
+            'stem'                => $stem,
+            'category'            => $category,
+            'resources'           => $resources,
+            'totalResources'      => $totalResources,
+            'coverResource'       => $coverResource,
+            'categoryDescription' => $categoryDescription,
+        ]);
     }
 }
