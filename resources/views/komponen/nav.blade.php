@@ -3,7 +3,7 @@
         <div class="nav-container">
 
             <!-- LEFT (LOGO) -->
-            <a class="navbar-brand fw-bold" href="{{ route('home') }}">
+            <a class="navbar-brand fw-bold" href="{{ url('/') }}">
                 <img src="{{ asset('assets/logo_steam.png') }}" width="38">
                 CENTRE STEAM
             </a>
