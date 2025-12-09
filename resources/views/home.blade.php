@@ -283,46 +283,46 @@
     </section>
 
     <!-- SECTION 1 -->
-    <div class="container">
-        <div class="section-header">
-            <h2>Building STEM Literacy</h2>
-            <p>Resources designed to prepare educators for collaborating across the curriculum to build STEM literacy, interest, and engagement that will inspire students toward STEM college and careers.</p>
-        </div>
+<div class="container">
+    <div class="section-header">
+        <h2>Building STEM Literacy</h2>
+        <p>Resources designed to prepare educators for collaborating across the curriculum to build STEM literacy, interest, and engagement that will inspire students toward STEM college and careers.</p>
+    </div>
 
-        <div class="row g-4 justify-content-center">
-            @forelse ($stemResources as $resource)
-                <div class="col-md-6 col-lg-3">
-                    @if ($resource->link)
-                        <a href="{{ $resource->link }}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="text-decoration-none text-reset">
-                    @endif
-                        <div class="resource-card">
-                            <img src="{{ asset("assets/logo_steam.png") }}"
-                            class="resource-img"
-                            alt="{{ $resource->title }}">
-                            <div class="p-3">
-                                <div class="resource-title">
-                                    {{ $resource->category_resource }}
-                                </div>
-                                <div class="resource-count">
-                                    {{ $resourceCounts[$resource->category_resource] ?? 0 }} resources
-                                </div>
+    <div class="row g-4 justify-content-center">
+        @forelse ($stemResources as $resource)
+            <div class="col-md-6 col-lg-3">
+                @if ($resource->link)
+                    <a href="{{ $resource->link }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="text-decoration-none text-reset">
+                @endif
+                    <div class="resource-card">
+                        <img src="{{ asset('assets/logo_steam.png') }}"
+                             class="resource-img"
+                             alt="{{ $resource->title ?? $resource->category_resource }}">
+                        <div class="p-3">
+                            <div class="resource-title">
+                                {{ $resource->category_resource }}
+                            </div>
+                            <div class="resource-count">
+                                {{ $resource->total_resources }} resources
                             </div>
                         </div>
-                        @if ($resource->link)
-                            </a>
-                        @endif
-                </div>
-            @empty
-                <p class="text-center">
-                    Belum ada resource untuk kategori ini.
-                </p>
-            @endforelse
-        </div>
-
+                    </div>
+                @if ($resource->link)
+                    </a>
+                @endif
+            </div>
+        @empty
+            <p class="text-center">
+                Belum ada resource untuk kategori ini.
+            </p>
+        @endforelse
     </div>
+</div>
+
 
     <!-- MODERN DIVIDER -->
     <div class="divider"></div>

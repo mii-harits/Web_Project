@@ -4,23 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Resource;
+use Illuminate\Support\Facades\DB;
 
 class DstnController extends Controller
 {
     public function index()
     {
-        // Ambil resource untuk section "Building STEM Literacy", max 8 data
+        // Ambil ringkasan resource utk section "Building STEM Literacy"
         $stemResources = Resource::where('category_stem', 'Building STEM Literacy')
-            ->latest()          // opsional: urutkan dari yang terbaru
-            ->limit(8)          // batasi 8 data
-            ->get();
-
-        // Hitung jumlah resource per category_resource
-        $resourceCounts = Resource::where('category_stem', 'Building STEM Literacy')
-            ->select('category_resource')
-            ->selectRaw('COUNT(*) as total')
+            ->select(
+                'category_resource',
+                DB::raw('COUNT(*) as total_resources'),
+                DB::raw('MIN(link) as link'),   // ambil salah satu link sebagai perwakilan (opsional)
+                DB::raw('MIN(title) as title')  // ambil salah satu title utk alt gambar (opsional)
+            )
             ->groupBy('category_resource')
-            ->pluck('total', 'category_resource'); // hasil: ['Books' => 10, 'Modules' => 5, ...]
+            ->orderBy('category_resource')     // boleh diganti sesuai kebutuhan
+            ->limit(8)                         // max 8 kategori
+            ->get();
 
         // SECTION 2
         $learningResources = Resource::where('category_stem', 'STEM Learning Resources')
@@ -61,6 +62,6 @@ class DstnController extends Controller
             ->groupBy('category_resource')
             ->pluck('total', 'category_resource'); // hasil: ['Books' => 10, 'Modules' => 5, ...]
 
-        return view('home', compact('stemResources', 'learningResources','futureResources', 'providerResources', 'resourceCounts', 'learningCounts', 'futureCounts', 'providerCounts'));
+        return view('home', compact('stemResources', 'learningResources','futureResources', 'providerResources', 'learningCounts', 'futureCounts', 'providerCounts'));
     }
 }
