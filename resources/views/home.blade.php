@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CENTRE STEAM</title>
-    {{-- <link rel="icon" type="image/png" href="https://oercommons.org/static/images/favicon.ico"> --}}
+    <link rel="icon" type="image/png" href="{{ asset('assets/logo_steam.png') }}">
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -229,8 +229,8 @@
 
         <!-- LEFT (LOGO) -->
         <a class="navbar-brand fw-bold" href="{{ route('home') }}">
-            {{-- <img src="https://oercommons.org/static/newdesign/images/logo-hidpi-square.png" width="38"> --}}
-            STEM Center
+            <img src="{{ asset('assets/logo_steam.png') }}" width="38">
+            CENTRE STEAM
         </a>
 
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
@@ -299,15 +299,15 @@
                         class="text-decoration-none text-reset">
                     @endif
                         <div class="resource-card">
-                            <img src="{{ asset('storage/resources/' . $resource->image) }}"
+                            <img src="{{ asset("assets/logo_steam.png") }}"
                             class="resource-img"
                             alt="{{ $resource->title }}">
                             <div class="p-3">
                                 <div class="resource-title">
-                                    {{ $resource->title }}
+                                    {{ $resource->category_resource }}
                                 </div>
                                 <div class="resource-count">
-                                    {{ $resource->category_resource }}
+                                    {{ $resourceCounts[$resource->category_resource] ?? 0 }} resources
                                 </div>
                             </div>
                         </div>
@@ -344,15 +344,15 @@
                         class="text-decoration-none text-reset">
                     @endif
                         <div class="resource-card">
-                            <img src="{{ asset('storage/resources/' . $resource->image) }}"
+                            <img src="{{ asset("assets/logo_steam.png") }}"
                             class="resource-img"
                             alt="{{ $resource->title }}">
                             <div class="p-3">
                                 <div class="resource-title">
-                                    {{ $resource->title }}
+                                    {{ $resource->category_resource }}
                                 </div>
                                 <div class="resource-count">
-                                    {{ $resource->category_resource }}
+                                    {{ $learningCounts[$resource->category_resource] ?? 0 }} resources
                                 </div>
                             </div>
                         </div>
@@ -389,15 +389,15 @@
                         class="text-decoration-none text-reset">
                     @endif
                         <div class="resource-card">
-                            <img src="{{ asset('storage/resources/' . $resource->image) }}"
+                            <img src="{{ asset("assets/logo_steam.png") }}"
                             class="resource-img"
                             alt="{{ $resource->title }}">
                             <div class="p-3">
                                 <div class="resource-title">
-                                    {{ $resource->title }}
+                                    {{ $resource->category_resource }}
                                 </div>
                                 <div class="resource-count">
-                                    {{ $resource->category_resource }}
+                                    {{ $futureCounts[$resource->category_resource] ?? 0 }} resources
                                 </div>
                             </div>
                         </div>
@@ -432,15 +432,15 @@
                         class="text-decoration-none text-reset">
                     @endif
                         <div class="resource-card">
-                            <img src="{{ asset('storage/resources/' . $resource->image) }}"
+                            <img src="{{ asset("assets/logo_steam.png") }}"
                             class="resource-img"
                             alt="{{ $resource->title }}">
                             <div class="p-3">
                                 <div class="resource-title">
-                                    {{ $resource->title }}
+                                    {{ $resource->category_resource }}
                                 </div>
                                 <div class="resource-count">
-                                    {{ $resource->category_resource }}
+                                    {{ $providerCounts[$resource->category_resource] ?? 0 }} resources
                                 </div>
                             </div>
                         </div>
