@@ -169,67 +169,131 @@ body::before {
 </head>
 <body>
 <div class="form-container">
-    <h2 class="form-title">Edit Buku</h2>
-    <form id="bookForm" action="{{ route('resources.update', $resource->id) }}" method="POST" enctype="multipart/form-data">
+    <h2 class="form-title mb-3">Edit Buku</h2>
+
+    {{-- Notifikasi error global (opsional) --}}
+    @if ($errors->any())
+        <div class="alert alert-danger mb-3">
+            <strong>Ups, ada yang perlu dicek lagi:</strong>
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form id="bookForm"
+        action="{{ route('resources.update', $resource->id) }}"
+        method="POST"
+        enctype="multipart/form-data">
         @csrf
+        @method('PUT')
 
-        <!-- Judul -->
+        {{-- Judul --}}
         <div class="glass-input">
-            <input type="text" id="title" name="title" value="{{ $resource->title }}"  required placeholder="Judul" />
+            <input type="text"
+                id="title"
+                name="title"
+                value="{{ old('title', $resource->title) }}"
+                required
+                placeholder="Judul">
             <label for="title">Judul</label>
+            @error('title')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
         </div>
 
-        <!-- Kategori STEM -->
+        {{-- Kategori STEM --}}
         <div class="glass-input">
-            <input type="text" id="category_stem" name="category_stem" value="{{ $resource->category_stem }}" required placeholder="Kategori STEM" />
+            <input type="text"
+                id="category_stem"
+                name="category_stem"
+                value="{{ old('category_stem', $resource->category_stem) }}"
+                required
+                placeholder="Kategori STEM">
             <label for="category_stem">Kategori STEM</label>
+            @error('category_stem')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
         </div>
 
-        <!-- Kategori Resource -->
+        {{-- Kategori Resource --}}
         <div class="glass-input">
-            <input type="text" id="category_resource" name="category_resource" value="{{ $resource->category_resource }}" required placeholder="Kategori Resource" />
+            <input type="text"
+                id="category_resource"
+                name="category_resource"
+                value="{{ old('category_resource', $resource->category_resource) }}"
+                required
+                placeholder="Kategori Resource">
             <label for="category_resource">Kategori Resource</label>
+            @error('category_resource')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
         </div>
-        
-        <!-- Link -->
+
+        {{-- Link --}}
         <div class="glass-input">
-            <input type="url" id="link" name="link" value="{{ $resource->link }}" placeholder="Link" />
+            <input type="url"
+                id="link"
+                name="link"
+                value="{{ old('link', $resource->link) }}"
+                placeholder="Link">
             <label for="link">Link</label>
+            @error('link')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
         </div>
-        
-        <!-- Deskripsi -->
+
+        {{-- Deskripsi --}}
         <div class="glass-input">
-            <textarea id="description" name="description" rows="4" placeholder="Deskripsi">{{ $resource->description }}</textarea>
+            <textarea id="description"
+                    name="description"
+                    rows="4"
+                    placeholder="Deskripsi">{{ old('description', $resource->description) }}</textarea>
             <label for="description">Deskripsi</label>
+            @error('description')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
         </div>
 
-
-        <!-- Upload Image -->
+        {{-- Upload Image --}}
         <div class="glass-input">
-            <label>Upload Gambar</label>
+            <label class="mb-2" style="color:#fff;">Upload Gambar</label>
+
             <div class="drop-zone" id="drop-zone">
-                <span id="file-text" style="{{ $resource->image ? '' : '' }}">
-                    Upload Gambar Baru (Optional)
+                {{-- Text di dalam kotak --}}
+                <span id="file-text">
+                    Upload Gambar Baru (Opsional)
                 </span>
-                
-                <input type="file" id="image" name="image" accept="image/*" style="display:none;">
-                
-                <span id="file-label" style="color:#fff;">
-                    {{ $resource->image ?? 'Pilih File' }}
+
+                {{-- Input file asli (disembunyikan) --}}
+                <input type="file"
+                    id="image"
+                    name="image"
+                    accept="image/*"
+                    style="display:none;">
+
+                {{-- Nama file --}}
+                <span id="file-label" style="color:#fff; display:block; margin-top:4px;">
+                    {{ $resource->image ? $resource->image : 'Belum ada file dipilih' }}
                 </span>
-            
-                <!-- PREVIEW DEFAULT: jika ada gambar lama, tampilkan -->
+
+                {{-- Preview gambar lama / baru --}}
                 <img id="preview"
-                     src="{{ $resource->image ? asset('storage/resources/' . $resource->image) : '' }}"
-                     alt="Preview"
-                     style="display: {{ $resource->image ? 'block' : 'none' }}; margin-top:10px; border-radius:12px;">
-                
+                    src="{{ $resource->image ? asset('storage/resources/' . $resource->image) : '' }}"
+                    alt="Preview"
+                    style="display: {{ $resource->image ? 'block' : 'none' }};
+                            margin-top:10px;
+                            max-width: 100%;
+                            border-radius:12px;">
+
                 <small style="display:block; margin-top:5px; color: rgba(255,255,255,0.7); font-size: 0.85rem;">
                     Max Size: 10 MB
                 </small>
             </div>
 
-            <!-- Error Laravel -->
+            {{-- Error Laravel untuk image --}}
             @error('image')
                 <div class="text-danger" style="margin-top:10px; font-weight:600;">
                     {{ $message }}
@@ -241,9 +305,12 @@ body::before {
             <a href="{{ route('stem') }}" class="btn-glass-red me-2">
                 Cancel
             </a>
-            <button type="submit" class="btn-glass">Update Buku</button>
+            <button type="submit" class="btn-glass">
+                Update Buku
+            </button>
         </div>
     </form>
+
 </div>
 
 <script>
